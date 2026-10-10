@@ -1,1 +1,1 @@
-# VQC-variational-quantum-classifier-HPQC-perspective
+# Variational-Quantum-Classifier-HPQC-perspective
