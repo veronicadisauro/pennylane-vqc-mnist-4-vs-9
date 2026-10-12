@@ -59,6 +59,25 @@ A separate robustness study, **EXP02-B**, evaluates the optimizer comparison ove
 
 A supplementary experiment, **EXP09-C**, evaluates **Adam + MSE** on the baseline circuit and checks its behavior across the same initialization seeds.
 
+### Optimizer robustness study: EXP02-B
+
+The original optimizer comparison (EXP02) was performed using a single shared initialization, corresponding to seed `10599`. In that experiment, L-BFGS-B achieved the highest grading accuracy among the tested optimizers.
+
+However, VQC optimization is non-convex and its outcome can depend on the initial values of the trainable parameters. Therefore, a second experiment, **EXP02-B**, was added to verify whether the ranking observed in EXP02 remained stable when the initialization changed.
+
+EXP02-B repeats the optimizer comparison using three initialization seeds:
+
+- `10599`
+- `10600`
+- `10601`
+
+For each seed, COBYLA, Adam, L-BFGS-B, and SPSA start from exactly the same initial parameter vector. This paired design isolates the effect of the optimizer within each initialization.
+
+The results show that the ranking changes across seeds: L-BFGS-B is best for seed 10599, Adam is best for seed 10601, while Adam and COBYLA tie for seed 10600. Therefore, the single-seed result of EXP02 cannot be interpreted as evidence that L-BFGS-B is universally superior.
+
+Across the three tested initializations, Adam achieves the highest mean grading accuracy and the lowest variability, while L-BFGS-B reaches the highest single-run peak. The three main optimizers remain very close in absolute accuracy, whereas SPSA is consistently less competitive in the adopted configuration.
+
+Because only three initialization seeds are considered, EXP02-B should be interpreted as a robustness check rather than a statistically exhaustive benchmark.
 ## Main results
 
 The baseline grading accuracy is:
